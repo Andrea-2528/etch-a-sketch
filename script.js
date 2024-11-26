@@ -9,9 +9,8 @@ const buttonClearChange = document.querySelector(".clear");
 buttonGridChange.addEventListener("click", generateGrid);
 buttonBWChange.addEventListener("click", enableBW);
 buttonRGBChange.addEventListener("click", enableRGB);
-// buttonDarkeningChange.addEventListener("click", enableDarkening);
 buttonEraserChange.addEventListener("click", enableEraser);
-// buttonClearChange.addEventListener("click", enableClear);
+buttonClearChange.addEventListener("click", enableClear);
 
 let defaultSide=16;
 
@@ -113,4 +112,13 @@ function enableBW() {
 function enableEraser() {
     const gridElements = document.querySelectorAll(".gridElement")
     eraseColorGridElements(gridElements);
+}
+
+function enableClear() {
+    container.innerHTML="";
+    let sizeDisplay = document.querySelector(".size");
+    let side = sizeDisplay.textContent;
+    generateGridElements(side);
+    const gridElements = document.querySelectorAll(".gridElement");
+    bwColorGridElements(gridElements);
 }
