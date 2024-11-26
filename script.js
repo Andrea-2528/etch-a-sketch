@@ -13,6 +13,17 @@ buttonEraserChange.addEventListener("click", enableEraser);
 buttonClearChange.addEventListener("click", enableClear);
 
 let defaultSide=16;
+let isMouseDown = false;
+
+document.body.addEventListener("mousedown", (e) => {
+    if (e.button === 0) isMouseDown=true;
+});
+document.body.addEventListener("mouseup", (e) => {
+    isMouseDown=false;
+});
+document.body.addEventListener("mouseleave", (e) => {
+    isMouseDown=false;
+});
 
 function generateGridElements(side) {
     for (i=0;i<side*side;i++){
@@ -63,12 +74,14 @@ bwColorGridElements(gridElements);
 function rgbColorGridElements(gridElements){
     gridElements.forEach(element => {
         element.onmouseenter = () => {
-            if (element.style.backgroundColor == "rgb(255, 255, 255)" || parseFloat(element.style.opacity) == 0) {
-                element.style.backgroundColor = getRandomColor();
-                element.style.opacity = "0.1";
-            }else {
-                let currentOpacity = parseFloat(element.style.opacity);
-                element.style.opacity = currentOpacity + 0.1;
+            if (isMouseDown){
+                if (element.style.backgroundColor == "rgb(255, 255, 255)" || parseFloat(element.style.opacity) == 0) {
+                    element.style.backgroundColor = getRandomColor();
+                    element.style.opacity = "0.1";
+                }else {
+                    let currentOpacity = parseFloat(element.style.opacity);
+                    element.style.opacity = currentOpacity + 0.1;
+                }
             }
         }
     })
@@ -77,12 +90,14 @@ function rgbColorGridElements(gridElements){
 function bwColorGridElements(gridElements) {
     gridElements.forEach(element => {
         element.onmouseenter = () => {
-            if(element.style.backgroundColor == "rgb(255, 255, 255)" || parseFloat(element.style.opacity) ===0) {
-                element.style.backgroundColor = "black";
-                element.style.opacity = "0.1";
-            }else {
-                let currentOpacity = parseFloat(element.style.opacity);
-                element.style.opacity = currentOpacity + 0.1;
+            if(isMouseDown){
+                if(element.style.backgroundColor == "rgb(255, 255, 255)" || parseFloat(element.style.opacity) ===0) {
+                    element.style.backgroundColor = "black";
+                    element.style.opacity = "0.1";
+                }else {
+                    let currentOpacity = parseFloat(element.style.opacity);
+                    element.style.opacity = currentOpacity + 0.1;
+                }
             }
         }
     })
@@ -91,9 +106,11 @@ function bwColorGridElements(gridElements) {
 function eraseColorGridElements(gridElements) {
     gridElements.forEach(element => {
         element.onmouseenter = () => {
-            if(element.style.backgroundColor != "rgb(255, 255, 255)") {
-                element.style.backgroundColor = "white";
-                element.style.opacity = "0";
+            if(isMouseDown){
+                if(element.style.backgroundColor != "rgb(255, 255, 255)") {
+                    element.style.backgroundColor = "white";
+                    element.style.opacity = "0";
+                }
             }
         }
     })
