@@ -1,8 +1,17 @@
 const container = document.querySelector(".container");
-const buttonGridChange = document.querySelector("button");
+const buttonGridChange = document.querySelector("#button");
+const buttonBWChange = document.querySelector(".bw");
+const buttonRGBChange = document.querySelector(".rgb");
+const buttonDarkeningChange = document.querySelector(".darkening")
+const buttonEraserChange = document.querySelector(".eraser");
+const buttonClearChange = document.querySelector(".clear");
 
 buttonGridChange.addEventListener("click", generateGrid);
-
+buttonBWChange.addEventListener("click", enableBW);
+buttonRGBChange.addEventListener("click", enableRGB);
+// buttonDarkeningChange.addEventListener("click", enableDarkening);
+buttonEraserChange.addEventListener("click", enableEraser);
+// buttonClearChange.addEventListener("click", enableClear);
 
 let defaultSide=16;
 
@@ -11,7 +20,7 @@ function generateGridElements(side) {
         const gridElement = document.createElement("div");
         gridElement.classList.add("gridElement");
         gridElement.style.backgroundColor = "rgb(255, 255, 255)";
-        gridElement.style.opacity = "1";
+        gridElement.style.opacity = "0";
         gridElement.style.width = 600/side + "px";
         gridElement.style.height = 600/side + "px";
         container.appendChild(gridElement);
@@ -37,9 +46,7 @@ function generateGrid () {
     
     const gridElements = document.querySelectorAll(".gridElement");
 
-    colorGridElements(gridElements);
-
-
+    bwColorGridElements(gridElements);
 
 }
 
@@ -50,22 +57,60 @@ function getRandomColor() {
     return `rgb(${r}, ${g}, ${b})`;
 }
 
-
-
 const gridElements = document.querySelectorAll(".gridElement");
 
-colorGridElements(gridElements);
+bwColorGridElements(gridElements);
 
-function colorGridElements(gridElements){
+function rgbColorGridElements(gridElements){
     gridElements.forEach(element => {
-        element.addEventListener("mouseenter", () => {
-            if (element.style.backgroundColor == "rgb(255, 255, 255)") {
+        element.onmouseenter = () => {
+            if (element.style.backgroundColor == "rgb(255, 255, 255)" || parseFloat(element.style.opacity) == 0) {
                 element.style.backgroundColor = getRandomColor();
                 element.style.opacity = "0.1";
             }else {
                 let currentOpacity = parseFloat(element.style.opacity);
                 element.style.opacity = currentOpacity + 0.1;
             }
-        });
+        }
     })
+};
+
+function bwColorGridElements(gridElements) {
+    gridElements.forEach(element => {
+        element.onmouseenter = () => {
+            if(element.style.backgroundColor == "rgb(255, 255, 255)" || parseFloat(element.style.opacity) ===0) {
+                element.style.backgroundColor = "black";
+                element.style.opacity = "0.1";
+            }else {
+                let currentOpacity = parseFloat(element.style.opacity);
+                element.style.opacity = currentOpacity + 0.1;
+            }
+        }
+    })
+};
+
+function eraseColorGridElements(gridElements) {
+    gridElements.forEach(element => {
+        element.onmouseenter = () => {
+            if(element.style.backgroundColor != "rgb(255, 255, 255)") {
+                element.style.backgroundColor = "white";
+                element.style.opacity = "0";
+            }
+        }
+    })
+};
+
+function enableRGB() {
+    const gridElements = document.querySelectorAll(".gridElement")
+    rgbColorGridElements(gridElements);
+}
+
+function enableBW() {
+    const gridElements = document.querySelectorAll(".gridElement")
+    bwColorGridElements(gridElements);
+}
+
+function enableEraser() {
+    const gridElements = document.querySelectorAll(".gridElement")
+    eraseColorGridElements(gridElements);
 }
