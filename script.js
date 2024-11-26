@@ -4,19 +4,24 @@ const buttonGridChange = document.querySelector("button");
 buttonGridChange.addEventListener("click", generateGrid);
 
 
-let defaultSide=32;
+let defaultSide=16;
 
-for (i=0;i<defaultSide*defaultSide;i++){
-    const gridElement = document.createElement("div");
-    gridElement.classList.add("gridElement");
-    gridElement.style.backgroundColor = "rgb(255, 255, 255)";
-    gridElement.style.opacity = "0.1";
-    gridElement.style.width = 600/defaultSide + "px";
-    gridElement.style.height = 600/defaultSide + "px";
-    container.appendChild(gridElement);
+function generateGridElements(side) {
+    for (i=0;i<side*side;i++){
+        const gridElement = document.createElement("div");
+        gridElement.classList.add("gridElement");
+        gridElement.style.backgroundColor = "rgb(255, 255, 255)";
+        gridElement.style.opacity = "1";
+        gridElement.style.width = 600/side + "px";
+        gridElement.style.height = 600/side + "px";
+        container.appendChild(gridElement);
+    }
 }
 
+generateGridElements(defaultSide);
+
 function generateGrid () {
+
     container.innerHTML="";
 
     let side;
@@ -28,29 +33,13 @@ function generateGrid () {
     let sizeDisplay = document.querySelectorAll(".size");
     sizeDisplay.forEach(element => {element.textContent=side})
     
-    for (i=0;i<side*side;i++){
-        const gridElement = document.createElement("div");
-        gridElement.classList.add("gridElement");
-        gridElement.style.backgroundColor = "rgb(255, 255, 255)";
-        gridElement.style.opacity = "0.1";
-        gridElement.style.width = 600/side + "px";
-        gridElement.style.height = 600/side + "px";
-        container.appendChild(gridElement);
-    }
+    generateGridElements(side);
     
     const gridElements = document.querySelectorAll(".gridElement");
 
-    gridElements.forEach(element => {
-        element.addEventListener("mouseenter", () => {
-            if (element.style.backgroundColor == "rgb(255, 255, 255)") {
-                element.style.backgroundColor = getRandomColor();
-                element.style.opacity = "0.1";
-            }else {
-                let currentOpacity = parseFloat(element.style.opacity);
-                element.style.opacity = currentOpacity + 0.1;
-            }
-        });
-    });
+    colorGridElements(gridElements);
+
+
 
 }
 
@@ -65,14 +54,18 @@ function getRandomColor() {
 
 const gridElements = document.querySelectorAll(".gridElement");
 
-gridElements.forEach(element => {
-    element.addEventListener("mouseenter", () => {
-        if (element.style.backgroundColor == "rgb(255, 255, 255)") {
-            element.style.backgroundColor = getRandomColor();
-            element.style.opacity = "0.1";
-        }else {
-            let currentOpacity = parseFloat(element.style.opacity);
-            element.style.opacity = currentOpacity + 0.1;
-        }
-    });
-});
+colorGridElements(gridElements);
+
+function colorGridElements(gridElements){
+    gridElements.forEach(element => {
+        element.addEventListener("mouseenter", () => {
+            if (element.style.backgroundColor == "rgb(255, 255, 255)") {
+                element.style.backgroundColor = getRandomColor();
+                element.style.opacity = "0.1";
+            }else {
+                let currentOpacity = parseFloat(element.style.opacity);
+                element.style.opacity = currentOpacity + 0.1;
+            }
+        });
+    })
+}

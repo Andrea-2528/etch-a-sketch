@@ -32,6 +32,10 @@ button {
     border-radius: 20px;
 }
 
+.gridElement {
+    border: none;
+}
+
 .button {
     display: flex;
     justify-content: center;
@@ -39,6 +43,7 @@ button {
 }
 
 .container {
+    background-color: white;
     margin: auto;
     width: 600px;
     height: 600px;
