@@ -73,6 +73,15 @@ bwColorGridElements(gridElements);
 
 function rgbColorGridElements(gridElements){
     gridElements.forEach(element => {
+        element.onmousedown = () => {
+            if (element.style.backgroundColor == "rgb(255, 255, 255)" || parseFloat(element.style.opacity) == 0) {
+                element.style.backgroundColor = getRandomColor();
+                element.style.opacity = "0.1";
+            }else {
+                let currentOpacity = parseFloat(element.style.opacity);
+                element.style.opacity = currentOpacity + 0.1;
+            }
+        } 
         element.onmouseenter = () => {
             if (isMouseDown){
                 if (element.style.backgroundColor == "rgb(255, 255, 255)" || parseFloat(element.style.opacity) == 0) {
@@ -89,6 +98,15 @@ function rgbColorGridElements(gridElements){
 
 function bwColorGridElements(gridElements) {
     gridElements.forEach(element => {
+        element.onmousedown = () => {
+            if(element.style.backgroundColor == "rgb(255, 255, 255)" || parseFloat(element.style.opacity) ===0) {
+                element.style.backgroundColor = "black";
+                element.style.opacity = "0.1";
+            }else {
+                let currentOpacity = parseFloat(element.style.opacity);
+                element.style.opacity = currentOpacity + 0.1;
+            }
+        }
         element.onmouseenter = () => {
             if(isMouseDown){
                 if(element.style.backgroundColor == "rgb(255, 255, 255)" || parseFloat(element.style.opacity) ===0) {
@@ -105,6 +123,12 @@ function bwColorGridElements(gridElements) {
 
 function eraseColorGridElements(gridElements) {
     gridElements.forEach(element => {
+        element.onmousedown = () => {
+            if(element.style.backgroundColor != "rgb(255, 255, 255)") {
+                element.style.backgroundColor = "white";
+                element.style.opacity = "0";
+            }
+        } 
         element.onmouseenter = () => {
             if(isMouseDown){
                 if(element.style.backgroundColor != "rgb(255, 255, 255)") {
