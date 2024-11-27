@@ -142,16 +142,40 @@ function eraseColorGridElements(gridElements) {
 
 function enableRGB() {
     const gridElements = document.querySelectorAll(".gridElement")
+    buttonBWChange.style.backgroundColor = "white";
+    buttonBWChange.style.color = "black";
+    buttonRGBChange.style.backgroundColor = "rgb(80, 0, 0)";
+    buttonRGBChange.style.color = "white";
+    buttonEraserChange.style.backgroundColor = "white";
+    buttonEraserChange.style.color = "black";
+    buttonClearChange.style.backgroundColor = "white";
+    buttonClearChange.style.color = "black";
     rgbColorGridElements(gridElements);
 }
 
 function enableBW() {
     const gridElements = document.querySelectorAll(".gridElement")
+    buttonBWChange.style.backgroundColor = "rgb(80, 0, 0)";
+    buttonBWChange.style.color = "white";
+    buttonRGBChange.style.backgroundColor = "white";
+    buttonRGBChange.style.color = "black";
+    buttonEraserChange.style.backgroundColor = "white";
+    buttonEraserChange.style.color = "black";
+    buttonClearChange.style.backgroundColor = "white";
+    buttonClearChange.style.color = "black";
     bwColorGridElements(gridElements);
 }
 
 function enableEraser() {
     const gridElements = document.querySelectorAll(".gridElement")
+    buttonBWChange.style.backgroundColor = "white";
+    buttonBWChange.style.color = "black";
+    buttonRGBChange.style.backgroundColor = "white";
+    buttonRGBChange.style.color = "black";
+    buttonEraserChange.style.backgroundColor = "rgb(80, 0, 0)";
+    buttonEraserChange.style.color = "white";
+    buttonClearChange.style.backgroundColor = "white";
+    buttonClearChange.style.color = "black";
     eraseColorGridElements(gridElements);
 }
 
